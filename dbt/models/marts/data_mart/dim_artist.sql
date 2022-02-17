@@ -1,3 +1,3 @@
 select
-	DISTINCT(data ->> 'artist') as artist
-FROM {{ source('landing_tcgapi', 'ext_card') }}
+	DISTINCT artist
+FROM {{ ref('vw_card') }}

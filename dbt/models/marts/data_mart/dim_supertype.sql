@@ -1,3 +1,3 @@
 select
-	DISTINCT(data ->> 'superype') as superype
-FROM {{ source('landing_tcgapi', 'ext_card') }}
+	DISTINCT supertype
+FROM {{ ref('vw_card') }}

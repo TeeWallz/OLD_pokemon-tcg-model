@@ -46,4 +46,9 @@ models:
         +schema: data_mart
         +tags:
           - data_mart
-    
+    staging:
+      +materialized: table
+      +schema: staging
+      +tags:
+        - staging
+  

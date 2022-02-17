@@ -3,6 +3,8 @@
 select
 	data ->> 'id' AS id,
 	data ->> 'name' as name,
+	CASE WHEN (data ->> 'number')~E'^\\d+$' THEN cast(data ->> 'number' as integer) ELSE 0 end as number_int,
+	data -> 'set' ->> 'id' as set_id,
 	data ->> 'number' as number,
 	data ->> 'rarity' as rarity,
 	data ->> 'artist' as artist,
