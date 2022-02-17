@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, Unicode, UnicodeText, String, ForeignKey, DateTime, Date, UniqueConstraint, \
-    BINARY
+    BINARY, LargeBinary
 from sqlalchemy import create_engine
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import sessionmaker

@@ -10,6 +10,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 from tqdm import tqdm
 import time
 from pathlib import Path
+import codecs
 
 # from .sql_data_classes import models, set_engine
 from .sql_data_classes import models as tcg_models
@@ -22,6 +23,9 @@ Session = None
 
 def init(connection_string):
     global engine, Base, models, Session
+
+    print("Initializing..")
+    print("Connecting to sql")
     engine = create_engine(connection_string)
     Base = declarative_base(bind=engine)
     models = tcg_models(Base)
@@ -29,6 +33,7 @@ def init(connection_string):
     kek = 1
 
 def drop_all_and_extract(conn_string, cache_location):
+    print("Dropping current database")
     init(conn_string)
     clear_database()
     refresh_api_extract(cache_location)
@@ -89,7 +94,7 @@ def readDataIntoSql(cache_location=None):
                     object_filename_full = os.path.join(language_dir, object_filename)
                     set_code = object_filename.replace('.json', '')
 
-                    with open(object_filename_full) as object_f:
+                    with open(object_filename_full, encoding='utf-8-sig') as object_f:
                         object_data = json.load(object_f)
                         for single_object in object_data:
                             if 'id' in single_object:

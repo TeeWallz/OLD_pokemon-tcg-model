@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: landing_tcgapi
+    schema: landing_tcgapi
+    tags: 
+      - tcg_api    
+    tables:
+      - name: ext_set
+      - name: ext_card

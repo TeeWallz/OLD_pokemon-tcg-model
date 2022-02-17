@@ -1,0 +1,18 @@
+version: 2
+models:
+    - name: dim_cost_center
+      columns:
+        - name: id
+        - name: name
+        - name: series
+        - name: printedTotal
+        - name: total
+        - name: legalities
+        - name: legality_unlimited
+        - name: legality_standard
+        - name: legality_expanded
+        - name: ptcgoCode
+        - name: releaseDate
+        - name: updatedAt
+        - name: images_symbol
+        - name: images_logo
