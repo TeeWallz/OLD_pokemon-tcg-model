@@ -1,6 +1,7 @@
 with variations as (
 	select
 		vw_card.id,
+		vw_card.rarity,
 		set_id,
 		number_int,
 		json_object_keys(vw_card.tcgplayer -> 'prices') as variation
@@ -8,6 +9,7 @@ with variations as (
 )
 select
 	id,
+	rarity
 	set_id,
     number_int,
 	variation

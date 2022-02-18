@@ -1,3 +1,3 @@
 select
-	rarity
+	DISTINCT rarity
 FROM {{ ref('vw_card') }}
