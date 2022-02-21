@@ -3,6 +3,7 @@ select
 	max(id) as id,
 	max(number_int) as number_int,
 	max(rarity) as rarity,
+	max(supertype) as supertype,
 	max(releasedate) as releasedate,
 	string_agg(
 		variation,

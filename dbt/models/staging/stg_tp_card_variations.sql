@@ -2,9 +2,10 @@ with variations as (
 	select
 		set_id,
 		vw_card.id,
-		vw_card.rarity,
-		vw_set.releasedate,
 		number_int,
+		vw_card.rarity,
+		vw_card.supertype,
+		vw_set.releasedate,
 		json_object_keys(vw_card.tcgplayer -> 'prices') as variation
 	from {{ ref('vw_card') }}
 	left join {{ ref('vw_set') }}
@@ -15,6 +16,7 @@ select
 	id,
 	number_int,
 	rarity,
+	supertype,
 	releasedate,
 	variation
 from 

@@ -1,6 +1,7 @@
 select
 	set_id,
     rarity,
+	supertype,
 	max(releasedate) as releasedate,
 	variation_list,
 	string_agg(
@@ -11,6 +12,6 @@ select
 	count(*) as variation_count
 from 
 	{{ ref('stg_tp_card_variations_agg') }}
-group by set_id, rarity, variation_list
+group by set_id, rarity, supertype, variation_list
 order by
-	releasedate, set_id, rarity
+	releasedate, set_id, rarity, supertype
