@@ -15,7 +15,7 @@ profile: 'curacards_dbt'
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
-seed-paths: ["seeds"]
+seed-paths: ["data"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
@@ -40,6 +40,11 @@ models:
         +schema: landing_tcgapi
         +tags:
           - landing_tcgapi
+      landing_other:
+        +materialized: table
+        +schema: landing_other
+        +tags:
+          - landing_other
     marts:
       data_mart:
         +materialized: view
@@ -51,4 +56,10 @@ models:
       +schema: staging
       +tags:
         - staging
-  
+
+seeds:
+  curacards_dbt:
+    +schema: landing_seeds # default if no schema defined
+    +enabled: true
+    landing_seeds:
+      +schema: landing_seeds
