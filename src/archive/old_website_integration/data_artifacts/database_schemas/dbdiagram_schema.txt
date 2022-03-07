@@ -1,0 +1,165 @@
+// https://dbdiagram.io/d/614473d9825b5b0146070525
+// Creating tables
+
+Table series {
+  name varchar(50) [pk]
+}
+
+Table set {
+  id varchar(20) [pk]
+  name varchar(100)
+  series varchar(20) [ref: > series.name]
+  printedTotal int
+  total int
+  ptcgoCode varchar
+  releaseDate date
+  updatedAt datetime
+}
+
+Table legality {
+  name varchar [pk]
+}
+
+Table set_legality {
+  set varchar(20) [pk, ref: > set.id]
+  legality varchar [pk, ref: > legality.name]
+}
+
+Table set_images {
+  set varchar(20) [pk, ref: > set.id]
+  type varchar [pk]
+  url varchar
+}
+
+Table energy_type {
+  name varchar [pk]
+}
+
+Table rarity{
+  name varchar [pk]
+}
+
+Table card {
+  id varchar [pk, note: 'generated field from "{set}-{number}"']
+  set varchar(20) [ref: > set.id]
+  number varchar
+  name varchar
+  // subtypes
+  hp varchar
+  supertype varchar [ref: > supertype.name]
+  // types
+  // evolvesTo
+  // attack
+  // retreatCost
+  artist varchar [ref: > artist.name]
+  rarity varchar [ref: > rarity.name]
+}
+
+Table card_nationalPokedexNumber {
+  card varchar(20) [pk, ref: > card.id]
+  nationalPokedexNumber int
+}
+
+Table supertype {
+  name varchar [pk]
+}
+
+Table type{
+  name varchar [pk]
+}
+
+Table card_type {
+    name varchar [pk, ref: > type.name]
+    card varchar(20) [pk, ref: > card.id]
+}
+
+Table subtype {
+    name varchar [pk]
+}
+
+Table card_subtype {
+    name varchar [pk, ref: > subtype.name]
+    card varchar(20) [pk, ref: > card.id]
+}
+
+Table evolution {
+  name varchar [pk]
+}
+
+Table card_evolution {
+  card varchar(20) [pk, ref: > card.id]
+  evolution varchar [pk, ref: > evolution.name]
+}
+
+Table card_ability {
+  card varchar(20) [pk, ref: > card.id]
+  name varchar(20) [pk]
+  convertedEnergyCost varchar
+}
+
+
+Table card_attack {
+  card varchar(20) [pk, ref: > card.id]
+  name varchar [pk]
+  // cost
+  convertedEnergyCost int
+  damage varchar
+  text varchar
+}
+
+Table card_attack_cost {
+  card varchar(20) [pk, ref: > card_attack.card]
+  name varchar [pk, ref: > card_attack.name]
+  energy_type varchar [pk, ref: > energy_type.name]
+  amount int
+}
+
+Table card_retreat_cost {
+  card varchar(20) [pk, ref: > card.id]
+  energy_type varchar [pk, ref: > energy_type.name]
+  amount int
+}
+
+Table artist {
+  name varchar [pk]
+}
+
+
+Table deck {
+  id varchar [pk]
+  set varchar [ref: > set.id]
+  name varchar
+
+}
+
+Table deck_type{
+  deck varchar [pk, ref: > deck.id]
+  energy_type varchar [pk, ref: > energy_type.name]
+  amount int
+}
+
+Table deck_card{
+  deck varchar [ref: > deck.id]
+  id varchar [pk]
+  name varchar
+  rarity varchar [ref: > rarity.name]
+  count int
+}
+
+Table language{
+  code varchar(20) [pk]
+  name varchar(50)
+  hp_code varchar(10)
+}
+
+Table card_flavortext{
+  card varchar(20) [pk, ref: > card.id]
+  language varchar(20) [pk, ref: > language.code]
+  flavortext varchar(255)
+}
+
+Table card_name{
+  card varchar(20) [pk, ref: > card.id]
+  language varchar(20) [pk, ref: > language.code]
+  name varchar(255)
+}
